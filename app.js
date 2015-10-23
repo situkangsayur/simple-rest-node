@@ -8,8 +8,6 @@ http = require('http'),
 crudsiswa = require('./routes/siswa'),
 path = require('path');
 var bodyParser = require('body-parser');
-//var multer = require('multer'); // v1.0.5
-//var upload = multer(); // for parsing multipart/form-data
 
 var app = express();
 
@@ -25,7 +23,7 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // development only
 if ('development' == app.get('env')) {
@@ -43,11 +41,7 @@ app.post("/showbody", function(req, res){
 	})
 });
 
-
-
 app.get("/alldata", crudsiswa.allsiswa);
-
-
 
 app.get("/:nim", crudsiswa.search_by_nim);
 
